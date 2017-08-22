@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：整个MyBatis管理的映射文件中必须唯一 -->
+<mapper namespace="cn.itcast.mybatis.dao.UserMapper">
+	<!-- SQL -->
+	<!-- 根据id查询用户 -->
+	<select id="userById" parameterType="int" resultType="cn.itcast.mybatis.pojo.User">
+		select
+		u.name,
+		u.mobile,
+		u.sex,
+		u.age,
+		u.address
+		from user u 
+		where u.userId = #{userId}
+	
+	</select>
+	<!-- 根据name模糊查询用户 -->
+	<select id="userByName" parameterType="String" resultType="cn.itcast.mybatis.pojo.User">
+		select 
+		u.userId,
+		u.name,
+		u.mobile,
+		u.sex,
+		u.age,
+		u.address
+		from user u
+		where name like '%${value}%'
+	
+	</select>
+	<!-- 新增一个用户 -->
+	<select id="insertUser" parameterType="cn.itcast.mybatis.pojo.User">
+		insert into user 
+			(name,mobile,sex,age,address) 
+		value 
+			(#{name},#{mobile},#{sex},#{age},#{address})
+	
+	</select>
+	<!-- 更新用户 -->
+	<select id="updateUser" parameterType="cn.itcast.mybatis.pojo.User">
+		update user set 
+		name= #{name}
+		where
+		userId = #{userId}
+	</select>
+	
+	<!-- 删除一个用户 -->
+	<select id="deletetUser" parameterType="int">
+		Delete from user where userId=#{id}
+	
+	</select>
+</mapper>

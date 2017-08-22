@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+
+	<!-- 传统dao开发根据id查询用户 -->
+	<select   id="selectUserById" parameterType="int" resultType="cn.itcast.mybatis.pojo.User">
+		select 
+		u.userId,
+		u.name,
+		u.sex,
+		u.age,
+		u.address
+		from user u
+		where u.userId = #{userId}
+	
+	</select>
+	
+	<!-- 根据name查询用户 -->
+	
+	<select id="selectUserByName" parameterType="String" resultType="cn.itcast.mybatis.pojo.User">
+		
+		select
+		u.userId,
+		u.name,
+		u.sex,
+		u.age,
+		u.address
+		from user u
+		where u.name like '%${value}%'
+	</select>
+	
+	<!-- 实现新增用户 -->
+	<select id="insertUser" parameterType="int">
+		insert into user
+		(name,mobile,sex,age,address)
+		value
+		(#{name},#{mobile},#{sex},#{age},#{address})
+	
+	</select>
+	
+	<!-- 实现更新用户 -->
+	<select id="updateUser" resultType="cn.itcast.mybatis.pojo.User">
+		update user set
+		userId = #{userId},
+		name = #{name},
+		address = #{address}
+		where userId = #{userId}
+	</select>
+	
+	<!-- 删除一个用户 -->
+	<select id="deleteUser" parameterType="int">
+		delete from user 
+		where userId=#{userId}
+	
+	</select>
+	
+</mapper>
